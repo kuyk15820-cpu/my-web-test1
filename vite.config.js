@@ -2,9 +2,13 @@ import { defineConfig } from 'vite';
 import obfuscator from 'rollup-plugin-obfuscator';
 
 export default defineConfig({
+  // --- [เพิ่มส่วนนี้] บังคับให้ Vite มัดรวมและบีบอัด CSS ทั้งหมดลงบรรทัดเดียว ---
   build: {
     outDir: 'dist',
-    minify: false, // ปิด minify เดิมเพื่อให้ obfuscator ทำหน้าที่จัดการทั้งหมดแทน
+    minify: false, // ปิด JS minify เพื่อให้ Obfuscator จัดการ JS เอง
+    cssMinify: 'lightningcss', // [เพิ่ม] บีบอัด CSS ทั้งหมดให้เหลือบรรทัดเดียวแบบแน่นที่สุด
+    cssCodeSplit: false,       // [เพิ่ม] รวบรวม CSS ทั้งโปรเจกต์มัดเป็นไฟล์เดียว
+    
     rollupOptions: {
       input: {
         repo: 'src/assets/repo.js',
@@ -41,7 +45,11 @@ export default defineConfig({
           stringArrayWrappersCount: 5,
           stringArrayThreshold: 1,
           splitStrings: true,
-          splitStringsChunkLength: 5,
+          splitStringsChunkLength: 3, // [แก้ไข] ลดความยาวเหลือ 3 อักขระเพื่อย่อยข้อความให้ละเอียดขึ้นอีก
+
+          // --- [เพิ่ม] เพิ่มระดับซับซ้อนในการแกะ String Array ---
+          stringArrayWrappersChainedCalls: true,
+          stringArrayCallsTransform: true,
 
           // --- เปลี่ยนชื่อตัวแปรเป็นเลขฐาน 16 ---
           identifierNamesGenerator: 'hexadecimal'
