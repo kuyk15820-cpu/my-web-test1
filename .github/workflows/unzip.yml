@@ -19,13 +19,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # เปลี่ยนเป็น Node 22 แก้ปัญหา Deprecated
+          node-version: '22'
+          cache: 'npm' # เพิ่ม Caching ช่วยให้ npm install ครั้งต่อไปไวขึ้นมาก
 
-      - name: Install & Build
+      - name: Install Dependencies
         run: |
-          npm install
-          npm install -D lightningcss  # เพิ่มคำสั่งนี้เพื่อลงเครื่องมือบีบอัด CSS บนคลาวด์
-          npm run build
+          npm ci
+          npm install -D lightningcss  # การันตีว่า Binary ของ lightningcss บน Linux ubuntu ถูกลงถูกต้อง
+
+      - name: Build Project
+        run: npm run build
 
       - name: Deploy Build to Branch
         uses: peaceiris/actions-gh-pages@v4
