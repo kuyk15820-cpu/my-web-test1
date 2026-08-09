@@ -20,14 +20,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm' # เพิ่ม Caching ช่วยให้ npm install ครั้งต่อไปไวขึ้นมาก
 
       - name: Install Dependencies
         run: |
-          npm ci
-          npm install -D lightningcss  # การันตีว่า Binary ของ lightningcss บน Linux ubuntu ถูกลงถูกต้อง
+          npm install
+          npm install -D lightningcss
 
       - name: Build Project
+        env:
+          NODE_OPTIONS: "--no-warnings" # ซ่อน DeprecationWarning (punycode) ไม่ให้ขึ้นกวนใจใน Log
         run: npm run build
 
       - name: Deploy Build to Branch
