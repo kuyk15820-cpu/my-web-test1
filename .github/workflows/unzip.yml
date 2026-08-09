@@ -23,7 +23,8 @@ jobs:
 
       - name: Install & Build
         run: |
-          npm install    # ใช้ npm install เหมือนเดิม (ไม่ต้องใช้ package-lock.json)
+          npm install
+          npm install -D lightningcss  # เพิ่มคำสั่งนี้เพื่อลงเครื่องมือบีบอัด CSS บนคลาวด์
           npm run build
 
       - name: Deploy Build to Branch
