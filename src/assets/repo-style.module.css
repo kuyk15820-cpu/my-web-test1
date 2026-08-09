@@ -1,4 +1,5 @@
-*, *::before, *::after { 
+/* ── Global Resets & Root Variables ────────────────────── */
+:global(*) { 
   box-sizing: border-box; 
   margin: 0; 
   padding: 0; 
@@ -21,13 +22,7 @@
   outline: none !important;
 }
 
-html, body {
-  min-height: 100%;
-  width: 100%;
-  background-color: var(--bg);
-}
-
-:root {
+:global(:root) {
   --bg:        #0d0d14;
   --surface:   #16161f;
   --surface2:  #1e1e2a;
@@ -40,7 +35,13 @@ html, body {
   --radius:    18px;
 }
 
-body {
+:global(html), :global(body) {
+  min-height: 100%;
+  width: 100%;
+  background-color: var(--bg);
+}
+
+:global(body) {
   background: var(--bg);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -57,6 +58,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .hero::before {
   content: '';
   position: absolute;
@@ -64,7 +66,7 @@ body {
   pointer-events: none;
 }
 
-.hero-logo {
+.heroLogo {
   width: 96px;
   height: 96px;
   border-radius: 26px;
@@ -98,7 +100,7 @@ body {
   border-radius: 1px;
 }
 
-.section-header {
+.sectionHeader {
   max-width: 680px;
   margin: 24px auto 16px;
   padding: 0 20px;
@@ -106,12 +108,14 @@ body {
   align-items: baseline;
   gap: 10px;
 }
-.section-header h2 {
+
+.sectionHeader h2 {
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--text);
 }
-.section-header .badge {
+
+.badge {
   font-size: .75rem;
   font-weight: 600;
   padding: 2px 8px;
@@ -122,7 +126,7 @@ body {
 }
 
 /* ── Package cards ────────────────────────────── */
-.pkg-grid {
+.pkgGrid {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 16px;
@@ -132,7 +136,7 @@ body {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-.pkg-card {
+.pkgCard {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -145,11 +149,11 @@ body {
   outline: none !important;
 }
 
-.pkg-card:hover,
-.pkg-card:active,
-.pkg-card:focus,
-.pkg-card:focus-visible,
-.pkg-card:focus-within {
+.pkgCard:hover,
+.pkgCard:active,
+.pkgCard:focus,
+.pkgCard:focus-visible,
+.pkgCard:focus-within {
   background: var(--surface);
   border-color: var(--border);
   outline: none !important;
@@ -157,7 +161,7 @@ body {
   transform: none;
 }
 
-.pkg-icon {
+.pkgIcon {
   width: 54px;
   height: 54px;
   border-radius: 13px;
@@ -165,9 +169,12 @@ body {
   background: var(--surface2);
 }
 
-.pkg-info { flex: 1; min-width: 0; }
+.pkgInfo { 
+  flex: 1; 
+  min-width: 0; 
+}
 
-.pkg-name {
+.pkgName {
   font-weight: 600;
   font-size: 1rem;
   white-space: nowrap;
@@ -175,14 +182,14 @@ body {
   text-overflow: ellipsis;
 }
 
-.pkg-desc {
+.pkgDesc {
   color: var(--muted);
   font-size: .875rem;
   margin-top: 2px;
   line-height: 1.4;
 }
 
-.pkg-version {
+.pkgVersion {
   display: inline-block;
   margin-top: 5px;
   font-size: .75rem;
@@ -193,10 +200,14 @@ body {
 }
 
 /* ── Footer ───────────────────────────────────── */
-footer {
+:global(footer) {
   text-align: center;
   margin-top: 24px;
   color: var(--muted);
   font-size: .8rem;
 }
-footer a { color: var(--accent2); text-decoration: none; }
+
+:global(footer) a { 
+  color: var(--accent2); 
+  text-decoration: none; 
+}
