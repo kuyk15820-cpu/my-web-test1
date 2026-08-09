@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import obfuscator from 'rollup-plugin-obfuscator';
 
 export default defineConfig({
-  // --- [เพิ่มส่วนนี้] ตั้งค่าให้ CSS Modules สุ่มคลาสเป็น Hash มั่วๆ เพียวๆ 6 หลัก ---
+  plugins: [
+    react()
+  ],
   css: {
     modules: {
       generateScopedName: '_[hash:base64:6]'
@@ -12,11 +15,11 @@ export default defineConfig({
     outDir: 'dist',
     minify: false,
     cssMinify: 'lightningcss',
-    cssCodeSplit: false, // มัดรวม CSS ทั้งหมดเป็นไฟล์เดียว
+    cssCodeSplit: false,
     
     rollupOptions: {
       input: {
-        repo: 'src/assets/repo.js' 
+        repo: 'src/main.jsx' // หรือจุดที่เก็บไฟล์ React ของคุณ
       },
       output: {
         entryFileNames: 'assets/[name].js',
