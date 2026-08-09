@@ -19,12 +19,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm' # ช่วยเพิ่มความเร็วในการดึงแพ็กเกจมาติดตั้ง
+          node-version: '22' # เปลี่ยนเป็น Node 22 แก้ปัญหา Deprecated
 
-      - name: Install Dependencies & Build Obfuscated Code
+      - name: Install & Build
         run: |
-          npm ci
+          npm install    # ใช้ npm install เหมือนเดิม (ไม่ต้องใช้ package-lock.json)
           npm run build
 
       - name: Deploy Build to Branch
