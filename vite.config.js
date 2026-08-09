@@ -2,6 +2,12 @@ import { defineConfig } from 'vite';
 import obfuscator from 'rollup-plugin-obfuscator';
 
 export default defineConfig({
+  // --- [เพิ่มส่วนนี้] ตั้งค่าให้ CSS Modules สุ่มคลาสเป็น Hash มั่วๆ เพียวๆ 6 หลัก ---
+  css: {
+    modules: {
+      generateScopedName: '_[hash:base64:6]'
+    }
+  },
   build: {
     outDir: 'dist',
     minify: false,
@@ -11,7 +17,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         repo: 'src/assets/repo.js' 
-        // [ลบออกแล้ว] ไม่ต้องใส่ style: 'src/assets/repo-style.css' ในนี้แล้ว
       },
       output: {
         entryFileNames: 'assets/[name].js',
