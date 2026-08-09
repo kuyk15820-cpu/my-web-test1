@@ -1,3 +1,5 @@
+import './repo-style.css'; // ดึง CSS เข้ามารวมใน JS
+
 // 1. คลังข้อมูล Packages
 const packagesData = [
   {
