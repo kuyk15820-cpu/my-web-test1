@@ -1,4 +1,4 @@
-import styles from './repo-style.module.css';
+import styles from './assets/repo-style.module.css';
 
 // 1. คลังข้อมูล Packages
 const packagesData = [
