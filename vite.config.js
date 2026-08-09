@@ -19,7 +19,7 @@ export default defineConfig({
     
     rollupOptions: {
       input: {
-        repo: 'src/main.jsx' // หรือจุดที่เก็บไฟล์ React ของคุณ
+        repo: 'src/App.jsx' // หรือจุดที่เก็บไฟล์ React ของคุณ
       },
       output: {
         entryFileNames: 'assets/[name].js',
