@@ -1,6 +1,6 @@
-import './repo-style.css'; // ดึง CSS เข้ามารวมใน JS
+import styles from './repo-style.module.css'; // 1. ดึง CSS Modules เข้ามาเป็น Object
 
-// 1. คลังข้อมูล Packages
+// 1. คลังข้อมูล Packages (ใช้ข้อมูลเดิมของคุณครบถ้วน)
 const packagesData = [
   {
     name: "BatteryMirror",
@@ -105,45 +105,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
   if (!app) return;
 
-  // สร้าง HTML Cards ของทุก Package
+  // เรียกใช้ Class ผ่านตัวแปร styles['ชื่อคลาส']
   const pkgCardsHTML = packagesData.map(pkg => `
-    <div class="pkg-card">
-      <img class="pkg-icon" src="${pkg.icon}" alt="${pkg.name} icon" onerror="this.style.display='none'">
-      <div class="pkg-info">
-        <div class="pkg-name">${pkg.name}</div>
-        <div class="pkg-desc">${pkg.desc}</div>
-        <div class="pkg-version">${pkg.version}</div>
+    <div class="${styles['pkg-card']}">
+      <img class="${styles['pkg-icon']}" src="${pkg.icon}" alt="${pkg.name} icon" onerror="this.style.display='none'">
+      <div class="${styles['pkg-info']}">
+        <div class="${styles['pkg-name']}">${pkg.name}</div>
+        <div class="${styles['pkg-desc']}">${pkg.desc}</div>
+        <div class="${styles['pkg-version']}">${pkg.version}</div>
       </div>
     </div>
   `).join("");
 
-  // วาดโครงสร้างทั้งหมด (Hero, Divider, Grid, Footer) ลงใน #app
+  // วาดโครงสร้างทั้งหมด
   app.innerHTML = `
-    <div class="hero">
-      <img class="hero-logo" src="https://futur3sn0w.github.io/repo/CydiaIcon.png" alt="F1X3R">
+    <div class="${styles['hero']}">
+      <img class="${styles['hero-logo']}" src="https://futur3sn0w.github.io/repo/CydiaIcon.png" alt="F1X3R">
       <h1>F1X3R Developer</h1>
       <p>DarkStore &nbsp;&middot;&nbsp; ${packagesData.length} packages</p>
     </div>
 
-    <div class="divider"></div>
+    <div class="${styles['divider']}"></div>
 
-    <div class="section-header">
+    <div class="${styles['section-header']}">
       <h2>Packages</h2>
-      <span class="badge">${packagesData.length}</span>
+      <span class="${styles['badge']}">${packagesData.length}</span>
     </div>
 
-    <div class="pkg-grid">
+    <div class="${styles['pkg-grid']}">
       ${pkgCardsHTML}
     </div>
 
-    <div class="divider"></div>
+    <div class="${styles['divider']}"></div>
 
     <footer>
       <p>Made with ♡ by <a href="tg://user?id=6105731078">F1X3R</a></p>
     </footer>
   `;
 
-  // เช็ค User Agent หลังวาด UI เสร็จ
+  // เช็ค User Agent
   const ua = navigator.userAgent;
   if (/Sileo/.test(ua)) {
     document.querySelector('.btn-sileo')?.style.setProperty('outline', '2px solid white');
